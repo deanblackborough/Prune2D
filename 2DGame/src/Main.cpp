@@ -1,12 +1,17 @@
 #include <iostream>
 #include "Log/Log.h"
+#include "Engine/Engine.h"
 
 int main(int argc, char* argv[])
 {
     Prune::Log::Init();
-    PRUNE_LOG_INFO("Logging a message to the logger");
+    PRUNE_LOG_INFO("Logger started");
 
-    std::cout << "This is a test" << std::endl;
+    Prune::Engine engine;
+
+    engine.Up();
+    engine.Run();
+    engine.Down();
 
     return 0;
 }
