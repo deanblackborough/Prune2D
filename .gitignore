@@ -1,0 +1,12 @@
+[Bb]in/
+
+*.aps
+*.vs/
+
+# Visual studio ignores
+*.sln
+*.rc
+
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
