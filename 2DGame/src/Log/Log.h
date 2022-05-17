@@ -4,7 +4,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-namespace Engine
+namespace Prune
 {
     class Log
     {
@@ -18,8 +18,8 @@ namespace Engine
     };
 
     // Macros
-    #define ENGINE_LOG_CRITICAL(...) Engine::Log::GetLogger()->critical(__VA_ARGS__);
-    #define ENGINE_LOG_ERROR(...) Engine::Log::GetLogger()->error(__VA_ARGS__);
-    #define ENGINE_LOG_WARNING(...) Engine::Log::GetLogger()->warn(__VA_ARGS__);
-    #define ENGINE_LOG_INFO(...) Engine::Log::GetLogger()->info(__VA_ARGS__);
+    #define PRUNE_LOG_CRITICAL(...) Prune::Log::GetLogger()->critical(__VA_ARGS__);
+    #define PRUNE_LOG_ERROR(...) Prune::Log::GetLogger()->error(__VA_ARGS__);
+    #define PRUNE_LOG_WARNING(...) Prune::Log::GetLogger()->warn(__VA_ARGS__);
+    #define PRUNE_LOG_INFO(...) Prune::Log::GetLogger()->info(__VA_ARGS__);
 }

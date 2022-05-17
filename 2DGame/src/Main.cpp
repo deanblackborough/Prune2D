@@ -3,8 +3,8 @@
 
 int main(int argc, char* argv[])
 {
-    Engine::Log::Init();
-    ENGINE_LOG_INFO("Logging a message to the logger");
+    Prune::Log::Init();
+    PRUNE_LOG_INFO("Logging a message to the logger");
 
     std::cout << "This is a test" << std::endl;
 
