@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <entt.hpp>
 #include "../Log/Log.h"
 
 namespace Prune {
@@ -16,28 +17,30 @@ namespace Prune {
 
     private:
 
-        bool m_engineRunning;
-        bool m_borderless;
-        bool m_fullscreen;
+        bool m_EngineRunning;
+        bool m_Borderless;
+        bool m_Fullscreen;
 
-        const char* m_engineName;
+        const char* m_EngineName;
 
-        int m_windowWidth = 800;
-        int m_windowHeight = 600;
+        int m_WindowWidth = 800;
+        int m_WindowHeight = 600;
 
-        int m_logicalWindowWidth = 800;
-        int m_logicalWindowHeight = 600;
+        int m_LogicalWindowWidth = 800;
+        int m_LogicalWindowHeight = 600;
 
-        const int m_windowBackgroundR = 80;
-        const int m_windowBackgroundG = 50;
-        const int m_windowBackgroundB = 185;
-        const int m_windowBackgroundA = 255;
+        const int m_WindowBackgroundR = 80;
+        const int m_WindowBackgroundG = 50;
+        const int m_WindowBackgroundB = 185;
+        const int m_WindowBackgroundA = 255;
 
-        SDL_Window* m_window = nullptr;
-        SDL_Renderer* m_renderer = nullptr;
+        SDL_Window* m_Window = nullptr;
+        SDL_Renderer* m_Renderer = nullptr;
+
+        entt::registry m_Registry;
 
         void CaptureInputEvents();
-
+        void Update();
         void Render();
         
         void SDLCreateRenderer();

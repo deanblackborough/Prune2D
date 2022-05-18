@@ -32,7 +32,8 @@ project "2DGame"
         "vendor/sol",
         "vendor/sdl/include",
         "vendor/lua",
-        "vendor/spdlog/include"
+        "vendor/spdlog/include",
+        "vendor/entt/include"
     }
       
     libdirs
