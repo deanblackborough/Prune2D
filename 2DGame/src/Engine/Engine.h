@@ -10,13 +10,17 @@ namespace Prune {
         Engine();
         ~Engine();
 
-        void Up();
-        void Run();
         void Down();
+        void Run();
+        void Up();
 
     private:
 
         bool m_engineRunning;
+        bool m_borderless;
+        bool m_fullscreen;
+
+        const char* m_engineName;
 
         int m_windowWidth = 800;
         int m_windowHeight = 600;
@@ -33,9 +37,11 @@ namespace Prune {
         SDL_Renderer* m_renderer = nullptr;
 
         void CaptureInputEvents();
-        void CreateSDLRenderer();
-        void CreateSDLWindow();
-        void InitSDL();
+
         void Render();
+        
+        void SDLCreateRenderer();
+        void SDLCreateWindow();
+        void SDLInit();
     };
 }
