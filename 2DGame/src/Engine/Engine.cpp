@@ -1,16 +1,8 @@
 #include "Engine.h"
 #include <glm.hpp>
-
-struct TransformComponent 
-{
-    glm::vec2 transform = glm::vec2(0, 0);
-    glm::vec2 scale = glm::vec2(0.0);
-};
-
-struct VelocityComponent
-{
-    glm::vec2 velocity = glm::vec2(0, 0);
-};
+#include "../Component/TransformComponent.h"
+#include "../Component/VelocityComponent.h"
+#include "../System/MovementSystem.h"
 
 Prune::Engine::Engine()
 {
@@ -91,7 +83,10 @@ void Prune::Engine::CaptureInputEvents()
 
 void Prune::Engine::Update()
 {
-    auto view = m_Registry.view<TransformComponent, VelocityComponent>();
+    MovementSystem movementSystem = MovementSystem();
+    movementSystem.Update(m_Registry);
+
+    /*auto view = m_Registry.view<TransformComponent, VelocityComponent>();
 
     for (auto entity : view) {
         auto& transform = view.get<TransformComponent>(entity);
@@ -102,7 +97,7 @@ void Prune::Engine::Update()
         transform.transform.x += 10;
 
         PRUNE_LOG_INFO("Transform set to x: {0}, y: {1}", transform.transform.x, transform.transform.y);
-    }
+    }*/
 }
 
 void Prune::Engine::Render()
