@@ -105,8 +105,9 @@ void Prune::Engine::Update(Game& game)
 
 void Prune::Engine::Render(Game& game)
 {
-    game.RenderBackground(m_Renderer);
-    game.Render(m_Registry, m_Renderer);
+    game.SetRenderer(m_Renderer);
+    game.RenderBackground();
+    game.Render(m_Registry);
 
     SDL_RenderPresent(m_Renderer);
 }

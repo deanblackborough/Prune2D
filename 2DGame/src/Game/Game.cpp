@@ -4,6 +4,21 @@
 #include "../System/MovementSystem.h"
 #include "../System/RenderSystem.h"
 
+void Prune::Game::SetRegistry(entt::registry& registry)
+{
+    
+}
+
+void Prune::Game::SetRenderer(SDL_Renderer* renderer)
+{
+    m_Renderer = renderer;
+}
+
+void Prune::Game::SetDeltaTime(double deltaTime)
+{
+    m_DeltaTime = deltaTime;
+}
+
 void Prune::Game::Entities(entt::registry& registry)
 {
     entt::entity entity = registry.create();
@@ -18,14 +33,14 @@ void Prune::Game::Systems(entt::registry& registry, double delta)
     movementSystem.Update(registry, delta);
 }
 
-void Prune::Game::Render(entt::registry& registry, SDL_Renderer* renderer)
+void Prune::Game::Render(entt::registry& registry)
 {
     RenderSystem renderSystem = RenderSystem();
-    renderSystem.Update(registry, renderer);
+    renderSystem.Update(registry, m_Renderer);
 }
 
-void Prune::Game::RenderBackground(SDL_Renderer* renderer)
+void Prune::Game::RenderBackground()
 {
-    SDL_SetRenderDrawColor(renderer, 80, 50, 185,255);
-    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(m_Renderer, 80, 50, 185,255);
+    SDL_RenderClear(m_Renderer);
 }
