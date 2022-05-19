@@ -12,18 +12,17 @@ namespace Prune
         Game() = default;
         ~Game() = default;
 
-        void SetRegistry(entt::registry& registry);
+        void InitECS();
         void SetRenderer(SDL_Renderer* renderer);
-        void SetDeltaTime(double deltaTime);
 
-        void Entities(entt::registry& registry);
-        void Systems(entt::registry& registry, double deltaTime);
-        void Render(entt::registry& registry);
+        void CaptureEvents();
+        void CreateEntities();
+        void RunSystems(double deltaTime);
+        void RenderEntities();
         void RenderBackground();
 
     private:
-        SDL_Renderer* m_Renderer;
+        SDL_Renderer* m_Renderer = nullptr;
         entt::registry m_Registry;
-        double m_DeltaTime;
     };
 }

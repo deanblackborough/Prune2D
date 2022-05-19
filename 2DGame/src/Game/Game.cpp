@@ -4,9 +4,9 @@
 #include "../System/MovementSystem.h"
 #include "../System/RenderSystem.h"
 
-void Prune::Game::SetRegistry(entt::registry& registry)
+void Prune::Game::InitECS()
 {
-    
+    entt::registry m_Registry;
 }
 
 void Prune::Game::SetRenderer(SDL_Renderer* renderer)
@@ -14,29 +14,35 @@ void Prune::Game::SetRenderer(SDL_Renderer* renderer)
     m_Renderer = renderer;
 }
 
-void Prune::Game::SetDeltaTime(double deltaTime)
+void Prune::Game::CaptureEvents()
 {
-    m_DeltaTime = deltaTime;
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        /*switch (event.type)
+        {
+        }*/
+    }
 }
 
-void Prune::Game::Entities(entt::registry& registry)
+void Prune::Game::CreateEntities()
 {
-    entt::entity entity = registry.create();
+    entt::entity entity = m_Registry.create();
 
-    registry.emplace<TransformComponent>(entity, glm::vec2(10, 60), glm::vec2(1, 1));
-    registry.emplace<VelocityComponent>(entity, glm::vec2(200, 0));
+    m_Registry.emplace<TransformComponent>(entity, glm::vec2(10, 60), glm::vec2(1, 1));
+    m_Registry.emplace<VelocityComponent>(entity, glm::vec2(200, 0));
 }
 
-void Prune::Game::Systems(entt::registry& registry, double delta)
+void Prune::Game::RunSystems(double delta)
 {
     MovementSystem movementSystem = MovementSystem();
-    movementSystem.Update(registry, delta);
+    movementSystem.Update(m_Registry, delta);
 }
 
-void Prune::Game::Render(entt::registry& registry)
+void Prune::Game::RenderEntities()
 {
     RenderSystem renderSystem = RenderSystem();
-    renderSystem.Update(registry, m_Renderer);
+    renderSystem.Update(m_Registry, m_Renderer);
 }
 
 void Prune::Game::RenderBackground()

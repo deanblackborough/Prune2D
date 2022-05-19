@@ -9,13 +9,11 @@ Prune::Engine::Engine()
     m_Borderless = false;
     m_Fullscreen = false;
     m_VSync = true;
-    m_GoalFPS = 60;
 
     PRUNE_LOG_INFO("EngineRunning set to {0}", m_EngineRunning);
     PRUNE_LOG_INFO("Borderless set to {0}", m_Borderless);
     PRUNE_LOG_INFO("Fullscreen set to {0}", m_Fullscreen);
     PRUNE_LOG_INFO("VSync set to {0}", m_VSync);
-    PRUNE_LOG_INFO("Goal FPS set to {0}", m_GoalFPS);
 }
 
 Prune::Engine::~Engine()
@@ -25,23 +23,33 @@ Prune::Engine::~Engine()
 void Prune::Engine::Down()
 {
     SDL_DestroyRenderer(m_Renderer);
-    PRUNE_LOG_INFO("Destroyed the renderer");
     SDL_DestroyWindow(m_Window);
-    PRUNE_LOG_INFO("Destroyed the window");
     SDL_Quit();
-    PRUNE_LOG_INFO("SDL Quit");
 }
 
 void Prune::Engine::Run()
 {
     Game game = Game();
-    game.Entities(m_Registry);
+    
+    game.InitECS();
+    game.CreateEntities();
+    
+    Uint32 frameEndTime = 0;
 
     while (m_EngineRunning)
     {
-        CaptureInputEvents();
-        Update(game);
+        Uint32 frameStartTime = SDL_GetTicks();
+        
+        CaptureEvents();
+        game.CaptureEvents();
+        
+        double deltaTime = (frameStartTime - frameEndTime) / 1000.f;
+        PRUNE_LOG_INFO("DeltaTime: {0}", deltaTime);
+
+        game.RunSystems(deltaTime);
         Render(game);
+
+        frameEndTime = frameStartTime;
     }
 }
 
@@ -51,10 +59,12 @@ void Prune::Engine::Up()
     Engine::SDLCreateWindow();
     Engine::SDLCreateRenderer();
 
+    entt::registry m_Registry;
+
     m_EngineRunning = true;
 }
 
-void Prune::Engine::CaptureInputEvents()
+void Prune::Engine::CaptureEvents()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) 
@@ -80,34 +90,11 @@ void Prune::Engine::CaptureInputEvents()
     }
 }
 
-void Prune::Engine::Update(Game& game)
-{
-    if (m_FrameEndTime == 0) { m_FrameEndTime = SDL_GetTicks(); }
-    Uint32 goalMillisecondsPerFrame = 1000 / m_GoalFPS;
-    Uint32 timeToWait = goalMillisecondsPerFrame - (SDL_GetTicks() - m_FrameEndTime);
-
-    // Delay if necessary
-    if (timeToWait > 0 && timeToWait <= goalMillisecondsPerFrame) 
-    {
-        SDL_Delay(timeToWait);
-    }
-
-    double deltaTime = (SDL_GetTicks() - m_FrameEndTime) / 1000.0;
-
-    //PRUNE_LOG_INFO("Goal milliseconds per frame: {0}", goalMillisecondsPerFrame);
-    //PRUNE_LOG_INFO("Delta time: {0} ", deltaTime);
-    //PRUNE_LOG_INFO("FPS: {0}", static_cast<int>(1 / deltaTime));
-
-    m_FrameEndTime = SDL_GetTicks();
-
-    game.Systems(m_Registry, deltaTime);
-}
-
 void Prune::Engine::Render(Game& game)
 {
     game.SetRenderer(m_Renderer);
     game.RenderBackground();
-    game.Render(m_Registry);
+    game.RenderEntities();
 
     SDL_RenderPresent(m_Renderer);
 }

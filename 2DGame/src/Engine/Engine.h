@@ -22,7 +22,7 @@ namespace Prune {
         bool m_Borderless;
         bool m_Fullscreen;
         bool m_VSync;
-        Uint32 m_GoalFPS;
+        bool m_ShowPFS;
 
         const char* m_EngineName;
 
@@ -32,15 +32,12 @@ namespace Prune {
         int m_LogicalWindowWidth = 800;
         int m_LogicalWindowHeight = 600;
 
-        Uint32 m_FrameEndTime = 0;
-
         SDL_Window* m_Window = nullptr;
         SDL_Renderer* m_Renderer = nullptr;
 
         entt::registry m_Registry;
 
-        void CaptureInputEvents();
-        void Update(Game& game);
+        void CaptureEvents();
         void Render(Game& game);
         
         void SDLCreateRenderer();
