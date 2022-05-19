@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <entt.hpp>
 #include "../Log/Log.h"
+#include "../Game/Game.h"
 
 namespace Prune {
     class Engine
@@ -21,6 +22,7 @@ namespace Prune {
         bool m_Borderless;
         bool m_Fullscreen;
         bool m_VSync;
+        Uint32 m_GoalFPS;
 
         const char* m_EngineName;
 
@@ -30,15 +32,7 @@ namespace Prune {
         int m_LogicalWindowWidth = 800;
         int m_LogicalWindowHeight = 600;
 
-        const int m_WindowBackgroundR = 80;
-        const int m_WindowBackgroundG = 50;
-        const int m_WindowBackgroundB = 185;
-        const int m_WindowBackgroundA = 255;
-
-        Uint32 m_FrameStartTime = 0;
         Uint32 m_FrameEndTime = 0;
-
-        Uint32 m_GoalFPS = 60;
 
         SDL_Window* m_Window = nullptr;
         SDL_Renderer* m_Renderer = nullptr;
@@ -46,8 +40,8 @@ namespace Prune {
         entt::registry m_Registry;
 
         void CaptureInputEvents();
-        void Update();
-        void Render();
+        void Update(Game& game);
+        void Render(Game& game);
         
         void SDLCreateRenderer();
         void SDLCreateWindow();
