@@ -20,6 +20,7 @@ namespace Prune {
         bool m_EngineRunning;
         bool m_Borderless;
         bool m_Fullscreen;
+        bool m_VSync;
 
         const char* m_EngineName;
 
@@ -33,6 +34,11 @@ namespace Prune {
         const int m_WindowBackgroundG = 50;
         const int m_WindowBackgroundB = 185;
         const int m_WindowBackgroundA = 255;
+
+        Uint32 m_FrameStartTime = 0;
+        Uint32 m_FrameEndTime = 0;
+
+        Uint32 m_GoalFPS = 60;
 
         SDL_Window* m_Window = nullptr;
         SDL_Renderer* m_Renderer = nullptr;

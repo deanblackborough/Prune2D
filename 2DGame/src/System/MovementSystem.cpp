@@ -1,20 +1,19 @@
+#include "MovementSystem.h"
 #include "../Component/TransformComponent.h"
 #include "../Component/VelocityComponent.h"
-#include "MovementSystem.h"
 #include "../Log/Log.h"
 
-void MovementSystem::Update(entt::registry& registry)
+void Prune::MovementSystem::Update(entt::registry& registry, double delta)
 {
     auto view = registry.view<TransformComponent, VelocityComponent>();
 
     for (auto entity : view) {
-        auto& transform = view.get<TransformComponent>(entity);
-        auto& velocity = view.get<VelocityComponent>(entity);
+        TransformComponent& transformComponent = view.get<TransformComponent>(entity);
+        VelocityComponent& velocityComponent = view.get<VelocityComponent>(entity);
 
-        PRUNE_LOG_INFO("Transform set to x: {0}, y: {1}", transform.transform.x, transform.transform.y);
+        transformComponent.transform.x += static_cast<int>(velocityComponent.velocity.x * delta);
+        transformComponent.transform.y += static_cast<int>(velocityComponent.velocity.y * delta);
 
-        transform.transform.x += 10;
-
-        PRUNE_LOG_INFO("Transform set to x: {0}, y: {1}", transform.transform.x, transform.transform.y);
+        PRUNE_LOG_INFO("Position set to x: {0}, y: {1}", transformComponent.transform.x, transformComponent.transform.y);
     }
 };

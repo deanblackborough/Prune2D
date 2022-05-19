@@ -1,6 +1,10 @@
 #include <glm.hpp>
 
-struct VelocityComponent
+// Set the velocity as the desired movement per second
+namespace Prune 
 {
-    glm::vec2 velocity = glm::vec2(0, 0);
-};
+    struct VelocityComponent
+    {
+        glm::vec2 velocity = glm::vec2(0, 0);
+    };
+}

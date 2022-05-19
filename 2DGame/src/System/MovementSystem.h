@@ -1,10 +1,13 @@
 #include <entt.hpp>
 
-class MovementSystem
+namespace Prune 
 {
-public:
-    MovementSystem() = default;
-    ~MovementSystem() = default;
-    
-    void Update(entt::registry& registry);
-};
+    class MovementSystem
+    {
+    public:
+        MovementSystem() = default;
+        ~MovementSystem() = default;
+
+        void Update(entt::registry& registry, double delta);
+    };
+}
