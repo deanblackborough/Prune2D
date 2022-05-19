@@ -4,7 +4,7 @@
 
 Prune::Engine::Engine()
 {
-    m_EngineName = "PruneEngine";
+    m_EngineName = "Prune2D";
     m_EngineRunning = false;
     m_Borderless = false;
     m_Fullscreen = false;

@@ -1,4 +1,4 @@
-workspace "2DGameEngine"
+workspace "Prune2D"
     architecture "x64"
     language "C++"
     cppdialect "C++latest"
@@ -11,8 +11,8 @@ workspace "2DGameEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "2DGame"
-    location "2DGame"
+project "Game"
+    location "Game"
     kind "ConsoleApp"
     language "C++"
 
