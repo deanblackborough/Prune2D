@@ -19,7 +19,7 @@ void Prune::RenderSystem::Update(entt::registry& registry, SDL_Renderer* rendere
             static_cast<int>(spriteComponent.height * transformComponent.scale.y)
         };
 
-        SDL_Surface* surface = IMG_Load("assets\\sprites\\yellow-star.png");
+        SDL_Surface* surface = IMG_Load("assets\\sprites\\yellow-animated-star.png");
         SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_FreeSurface(surface);
 

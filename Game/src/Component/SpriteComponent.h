@@ -31,8 +31,8 @@ namespace Prune
             int height = 0,
             int sourceRectX = 0,
             int sourceRectY = 0,
-            int sourceRectWidth = 0,
-            int sourceRectHeight = 0
+            int sourceRectWidth = 64,
+            int sourceRectHeight = 64
         )
         {
             this->spriteId = spriteId;

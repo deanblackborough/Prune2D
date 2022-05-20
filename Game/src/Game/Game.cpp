@@ -28,11 +28,18 @@ void Prune::Game::CaptureEvents()
 
 void Prune::Game::CreateEntities()
 {
-    entt::entity entity = m_Registry.create();
+    // Default
+    entt::entity entity1 = m_Registry.create();
+    m_Registry.emplace<TransformComponent>(entity1, glm::vec2(10, 10), glm::vec2(1, 1));
+    m_Registry.emplace<VelocityComponent>(entity1, glm::vec2(200, 0));
+    m_Registry.emplace<SpriteComponent>(entity1, "sprite", 32, 32, 0, 0);
 
-    m_Registry.emplace<TransformComponent>(entity, glm::vec2(10, 60), glm::vec2(1, 1));
-    m_Registry.emplace<VelocityComponent>(entity, glm::vec2(200, 0));
-    m_Registry.emplace<SpriteComponent>(entity, "sprite", 32, 32, 0, 0, 640, 640);
+    // Scaled
+    entt::entity entity2 = m_Registry.create();
+    m_Registry.emplace<TransformComponent>(entity2, glm::vec2(10, 50), glm::vec2(1, 1));
+    m_Registry.emplace<VelocityComponent>(entity2, glm::vec2(200, 0));
+    m_Registry.emplace<SpriteComponent>(entity2, "sprite", 32, 32, 65, 0);
+
 }
 
 void Prune::Game::RunSystems(double delta)
