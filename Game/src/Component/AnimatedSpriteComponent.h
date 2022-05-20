@@ -5,11 +5,12 @@
 namespace Prune
 {
     /**
-     * Set up the sprite animation properties for the sprite
+     * Set up the sprite animation properties for the AnimateSpriteSystem, the AnimateSpriteSystem
+     * fetches all entities with an AnimateSpriteSystem and a SpriteComponent
      *
      * @param startFrame The start frame, defaults to 1
      * @param animationFrames The number of frames in the sprite map
-     * @param frameSpeed The desired framespeed as frames per second
+     * @param frameSpeed The desired framespeed expressed as frames per second
      * @param startTime The time returned from SDL_GetTicks()
      */
     struct AnimatedSpriteComponent
