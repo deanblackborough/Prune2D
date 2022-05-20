@@ -1,8 +1,6 @@
 #include "RenderSystem.h"
 #include "../Component/TransformComponent.h"
-#include "../Component/VelocityComponent.h"
 #include "../Component/SpriteComponent.h"
-#include "../Log/Log.h"
 
 void Prune::RenderSystem::Update(entt::registry& registry, SDL_Renderer* renderer)
 {

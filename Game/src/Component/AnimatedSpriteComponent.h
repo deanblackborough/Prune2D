@@ -24,7 +24,7 @@ namespace Prune
         AnimatedSpriteComponent(
             int startFrame = 1,
             int animationFrames = 2,
-            int frameSpeed = 16
+            int frameSpeed = 4
         )
         {
             this->startFrame = startFrame;

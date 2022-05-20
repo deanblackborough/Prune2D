@@ -2,6 +2,8 @@
 #include "../Component/TransformComponent.h"
 #include "../Component/VelocityComponent.h"
 #include "../Component/SpriteComponent.h"
+#include "../Component/AnimatedSpriteComponent.h"
+#include "../System/AnimatedSpriteSystem.h"
 #include "../System/MovementSystem.h"
 #include "../System/RenderSystem.h"
 
@@ -36,22 +38,25 @@ void Prune::Game::CreateEntities()
 
     // Crop of image
     entt::entity entity2 = m_Registry.create();
-    m_Registry.emplace<TransformComponent>(entity2, glm::vec2(10, 50), glm::vec2(1, 1));
+    m_Registry.emplace<TransformComponent>(entity2, glm::vec2(10, 50), glm::vec2(1.4, 1.4));
     m_Registry.emplace<VelocityComponent>(entity2, glm::vec2(200, 0));
-    m_Registry.emplace<SpriteComponent>(entity2, "sprite", 32, 32, 65, 0);
+    m_Registry.emplace<SpriteComponent>(entity2, "sprite", 32, 32);
 
     // To be animated
     entt::entity entity3 = m_Registry.create();
     m_Registry.emplace<TransformComponent>(entity3, glm::vec2(10, 120), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(entity3, glm::vec2(200, 0));
-    m_Registry.emplace<SpriteComponent>(entity3, "sprite", 32, 32, 0, 0);
-
+    m_Registry.emplace<SpriteComponent>(entity3, "sprite", 32, 32);
+    m_Registry.emplace<AnimatedSpriteComponent>(entity3, 1, 2, 8);
 }
 
 void Prune::Game::RunSystems(double delta)
 {
     MovementSystem movementSystem = MovementSystem();
     movementSystem.Update(m_Registry, delta);
+
+    AnimatedSpriteSystem animatedSpriteSystem = AnimatedSpriteSystem();
+    animatedSpriteSystem.Update(m_Registry);
 }
 
 void Prune::Game::RenderEntities()
@@ -62,6 +67,6 @@ void Prune::Game::RenderEntities()
 
 void Prune::Game::RenderBackground()
 {
-    SDL_SetRenderDrawColor(m_Renderer, 80, 50, 185,255);
+    SDL_SetRenderDrawColor(m_Renderer, 80, 50, 185, 255);
     SDL_RenderClear(m_Renderer);
 }
