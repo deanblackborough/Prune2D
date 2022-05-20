@@ -32,13 +32,19 @@ void Prune::Game::CreateEntities()
     entt::entity entity1 = m_Registry.create();
     m_Registry.emplace<TransformComponent>(entity1, glm::vec2(10, 10), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(entity1, glm::vec2(200, 0));
-    m_Registry.emplace<SpriteComponent>(entity1, "sprite", 32, 32, 0, 0);
+    m_Registry.emplace<SpriteComponent>(entity1, "sprite", 32, 32);
 
-    // Scaled
+    // Crop of image
     entt::entity entity2 = m_Registry.create();
     m_Registry.emplace<TransformComponent>(entity2, glm::vec2(10, 50), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(entity2, glm::vec2(200, 0));
     m_Registry.emplace<SpriteComponent>(entity2, "sprite", 32, 32, 65, 0);
+
+    // To be animated
+    entt::entity entity3 = m_Registry.create();
+    m_Registry.emplace<TransformComponent>(entity3, glm::vec2(10, 120), glm::vec2(1, 1));
+    m_Registry.emplace<VelocityComponent>(entity3, glm::vec2(200, 0));
+    m_Registry.emplace<SpriteComponent>(entity3, "sprite", 32, 32, 0, 0);
 
 }
 
