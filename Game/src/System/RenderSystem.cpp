@@ -12,11 +12,9 @@ void Prune::RenderSystem::Update(entt::registry& registry, SDL_Renderer* rendere
         TransformComponent& transformComponent = view.get<TransformComponent>(entity);
         SpriteComponent& spriteComponent = view.get<SpriteComponent>(entity);
 
-        //SDL_Rect sourceRectangle = spriteComponent.sourceRect;
-
         SDL_Rect destinationRectangle = {
-            static_cast<int>(transformComponent.transform.x),
-            static_cast<int>(transformComponent.transform.y),
+            static_cast<int>(transformComponent.position.x),
+            static_cast<int>(transformComponent.position.y),
             static_cast<int>(spriteComponent.width * transformComponent.scale.x),
             static_cast<int>(spriteComponent.height * transformComponent.scale.y)
         };
