@@ -1,5 +1,6 @@
 #include <entt.hpp>
 #include <SDL.h>
+#include <SDL_image.h>
 
 namespace Prune 
 {

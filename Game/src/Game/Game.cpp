@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "../Component/TransformComponent.h"
 #include "../Component/VelocityComponent.h"
+#include "../Component/SpriteComponent.h"
 #include "../System/MovementSystem.h"
 #include "../System/RenderSystem.h"
 
@@ -31,6 +32,7 @@ void Prune::Game::CreateEntities()
 
     m_Registry.emplace<TransformComponent>(entity, glm::vec2(10, 60), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(entity, glm::vec2(200, 0));
+    m_Registry.emplace<SpriteComponent>(entity, "sprite", 32, 32, 0, 0, 640, 640);
 }
 
 void Prune::Game::RunSystems(double delta)

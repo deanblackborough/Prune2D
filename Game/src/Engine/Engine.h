@@ -22,7 +22,6 @@ namespace Prune {
         bool m_Borderless;
         bool m_Fullscreen;
         bool m_VSync;
-        bool m_ShowPFS;
 
         const char* m_EngineName;
 

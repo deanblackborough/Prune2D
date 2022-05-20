@@ -10,6 +10,7 @@ namespace Prune
      */
     struct VelocityComponent
     {
+    public:
         glm::vec2 velocity = glm::vec2(0, 0);
     };
 }
