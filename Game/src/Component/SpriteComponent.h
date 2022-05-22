@@ -5,14 +5,6 @@
 
 namespace Prune 
 {
-    /**
-     * Store the transformation properties of the entity
-     *
-     * @param spriteId The id of the sprite asset
-     * @param width Desired with of the sprite as an int
-     * @param height Desired height of the sprite as an int
-     * @param SDL_Rect The SDL_Rect of the source rectangle, the source x and y and crop width and height
-     */
     struct SpriteComponent
     {
     public:
