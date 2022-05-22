@@ -5,11 +5,11 @@
 
 namespace Prune 
 {
-    class RenderSystem
+    class SpriteRenderSystem
     {
     public:
-        RenderSystem() = default;
-        ~RenderSystem() = default;
+        SpriteRenderSystem() = default;
+        ~SpriteRenderSystem() = default;
 
         void Update(
             entt::registry& registry, 

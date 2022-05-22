@@ -5,7 +5,7 @@
 #include "../Component/AnimatedSpriteComponent.h"
 #include "../System/AnimatedSpriteSystem.h"
 #include "../System/MovementSystem.h"
-#include "../System/RenderSystem.h"
+#include "../System/SpriteRenderSystem.h"
 
 Prune::Game::Game()
 {
@@ -72,8 +72,8 @@ void Prune::Game::RunSystems(double delta)
 
 void Prune::Game::RenderEntities()
 {
-    RenderSystem renderSystem = RenderSystem();
-    renderSystem.Update(m_Registry, m_Renderer, m_SpriteLibrary);
+    SpriteRenderSystem spriteRenderSystem = SpriteRenderSystem();
+    spriteRenderSystem.Update(m_Registry, m_Renderer, m_SpriteLibrary);
 }
 
 void Prune::Game::RenderBackground()
