@@ -7,7 +7,6 @@
 
 namespace Prune
 {
-
     class SpriteLibrary
     {
     public:
@@ -16,13 +15,14 @@ namespace Prune
 
         void EmptyLibrary();
         void AddSprite(
-            SDL_Renderer* renderer,
             const std::string& spriteId,
             const std::string& spriteFilePath
         );
-        SDL_Texture* GetSpriteTexture(const std::string& assetId);
+        SDL_Texture* GetSpriteTexture(const std::string& spriteId);
+        void SetRenderer(SDL_Renderer* renderer);
 
     private:
+        SDL_Renderer* m_Renderer = nullptr;
         std::map<std::string, SDL_Texture*> m_SpriteTextures;
     };
 }

@@ -7,6 +7,11 @@
 #include "../System/MovementSystem.h"
 #include "../System/RenderSystem.h"
 
+Prune::Game::Game()
+{
+    m_SpriteLibrary = SpriteLibrary();
+}
+
 void Prune::Game::InitECS()
 {
     entt::registry m_Registry;
@@ -34,20 +39,26 @@ void Prune::Game::CreateEntities()
     entt::entity entity1 = m_Registry.create();
     m_Registry.emplace<TransformComponent>(entity1, glm::vec2(10, 10), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(entity1, glm::vec2(200, 0));
-    m_Registry.emplace<SpriteComponent>(entity1, "sprite", 32, 32);
+    m_Registry.emplace<SpriteComponent>(entity1, "yellow-animated-star", 32, 32);
 
     // Crop of image
     entt::entity entity2 = m_Registry.create();
     m_Registry.emplace<TransformComponent>(entity2, glm::vec2(10, 50), glm::vec2(1.4, 1.4));
     m_Registry.emplace<VelocityComponent>(entity2, glm::vec2(200, 0));
-    m_Registry.emplace<SpriteComponent>(entity2, "sprite", 32, 32);
+    m_Registry.emplace<SpriteComponent>(entity2, "yellow-animated-star", 32, 32);
 
     // To be animated
     entt::entity entity3 = m_Registry.create();
     m_Registry.emplace<TransformComponent>(entity3, glm::vec2(10, 120), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(entity3, glm::vec2(200, 0));
-    m_Registry.emplace<SpriteComponent>(entity3, "sprite", 32, 32);
+    m_Registry.emplace<SpriteComponent>(entity3, "yellow-animated-star", 32, 32);
     m_Registry.emplace<AnimatedSpriteComponent>(entity3, 1, 2, 8);
+}
+
+void Prune::Game::AddSpritesToLibrary()
+{
+    m_SpriteLibrary.SetRenderer(m_Renderer);
+    m_SpriteLibrary.AddSprite("yellow-animated-star", "assets\\sprites\\yellow-animated-star.png");
 }
 
 void Prune::Game::RunSystems(double delta)
@@ -62,7 +73,7 @@ void Prune::Game::RunSystems(double delta)
 void Prune::Game::RenderEntities()
 {
     RenderSystem renderSystem = RenderSystem();
-    renderSystem.Update(m_Registry, m_Renderer);
+    renderSystem.Update(m_Registry, m_Renderer, m_SpriteLibrary);
 }
 
 void Prune::Game::RenderBackground()

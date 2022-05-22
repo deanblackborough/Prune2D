@@ -2,14 +2,14 @@
 
 #include <SDL.h>
 #include <entt.hpp>
-
+#include "../Library/SpriteLibrary.h"
 
 namespace Prune
 {
     class Game
     {
     public:
-        Game() = default;
+        Game();
         ~Game() = default;
 
         void InitECS();
@@ -17,6 +17,7 @@ namespace Prune
 
         void CaptureEvents();
         void CreateEntities();
+        void AddSpritesToLibrary();
         void RunSystems(double deltaTime);
         void RenderEntities();
         void RenderBackground();
@@ -24,5 +25,6 @@ namespace Prune
     private:
         SDL_Renderer* m_Renderer = nullptr;
         entt::registry m_Registry;
+        SpriteLibrary m_SpriteLibrary;
     };
 }

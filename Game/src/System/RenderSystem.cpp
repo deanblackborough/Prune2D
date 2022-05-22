@@ -1,8 +1,13 @@
 #include "RenderSystem.h"
 #include "../Component/TransformComponent.h"
 #include "../Component/SpriteComponent.h"
+#include "../Log/Log.h"
 
-void Prune::RenderSystem::Update(entt::registry& registry, SDL_Renderer* renderer)
+void Prune::RenderSystem::Update(
+    entt::registry& registry, 
+    SDL_Renderer* renderer,
+    SpriteLibrary& spriteLibrary
+)
 {
     auto view = registry.view<TransformComponent, SpriteComponent>();
 
@@ -17,18 +22,23 @@ void Prune::RenderSystem::Update(entt::registry& registry, SDL_Renderer* rendere
             static_cast<int>(spriteComponent.height * transformComponent.scale.y)
         };
 
-        SDL_Surface* surface = IMG_Load("assets\\sprites\\yellow-animated-star.png");
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_FreeSurface(surface);
+        SDL_Texture* texture = spriteLibrary.GetSpriteTexture(spriteComponent.spriteId);
+        if (texture != nullptr)
+        {
 
-        SDL_RenderCopyEx(
-            renderer,
-            texture,
-            &spriteComponent.sourceRect,
-            &destinationRectangle,
-            transformComponent.rotation,
-            NULL,
-            SDL_FLIP_NONE
-        );
+            SDL_RenderCopyEx(
+                renderer,
+                texture,
+                &spriteComponent.sourceRect,
+                &destinationRectangle,
+                transformComponent.rotation,
+                NULL,
+                SDL_FLIP_NONE
+            );
+        } 
+        else
+        {
+            PRUNE_LOG_ERROR("Unable to fetch texture from SpriteLibrary for key '{0}'", spriteComponent.spriteId);
+        }
     }
 };

@@ -29,9 +29,11 @@ void Prune::Engine::Down()
 
 void Prune::Engine::Run()
 {
-    Game game = Game();
+    Game game;
     
     game.InitECS();
+    game.SetRenderer(m_Renderer);
+    game.AddSpritesToLibrary();
     game.CreateEntities();
     
     Uint32 frameEndTime = 0;
@@ -92,7 +94,6 @@ void Prune::Engine::CaptureEvents()
 
 void Prune::Engine::Render(Game& game)
 {
-    game.SetRenderer(m_Renderer);
     game.RenderBackground();
     game.RenderEntities();
 
