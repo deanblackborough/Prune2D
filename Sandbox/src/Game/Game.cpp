@@ -1,8 +1,9 @@
 #include "Game.h"
+#include "../Component/AnimatedSpriteComponent.h"
+#include "../Component/BoxCollider2D.h"
+#include "../Component/SpriteComponent.h"
 #include "../Component/TransformComponent.h"
 #include "../Component/VelocityComponent.h"
-#include "../Component/SpriteComponent.h"
-#include "../Component/AnimatedSpriteComponent.h"
 #include "../System/AnimatedSpriteSystem.h"
 #include "../System/MovementSystem.h"
 #include "../System/SpriteRenderSystem.h"
@@ -28,11 +29,13 @@ void Prune::Game::CreateEntities()
     m_Registry.emplace<TransformComponent>(plane_grey, glm::vec2(10, 10), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(plane_grey, glm::vec2(100, 0));
     m_Registry.emplace<SpriteComponent>(plane_grey, "plane-grey-right", 64, 64, 0, 0, 128, 128);
+    m_Registry.emplace<BoxCollider2D>(plane_grey, glm::vec2(64, 64));
 
     entt::entity plane_green = m_Registry.create();
     m_Registry.emplace<TransformComponent>(plane_green, glm::vec2((800-10-64), 10), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(plane_green, glm::vec2(-100, 0));
     m_Registry.emplace<SpriteComponent>(plane_green, "plane-green-left", 64, 64, 0, 0, 128, 128);
+    m_Registry.emplace<BoxCollider2D>(plane_green, glm::vec2(64, 64));
 }
 
 void Prune::Game::AddSpritesToLibrary()

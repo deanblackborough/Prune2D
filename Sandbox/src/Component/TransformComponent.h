@@ -3,7 +3,7 @@
 namespace Prune 
 {
     /**
-     * Store the transformation properties of the entity
+     * Store the transformation/position properties of the entity
      *
      * @param A glm::vec2 for the x and y position
      * @param scale A glm::vec2 for the x and y scale
