@@ -16,8 +16,8 @@ void Prune::SpriteRenderSystem::Update(
         SpriteComponent& spriteComponent = view.get<SpriteComponent>(entity);
 
         SDL_Rect destinationRectangle = {
-            static_cast<int>(transformComponent.position.x),
-            static_cast<int>(transformComponent.position.y),
+            static_cast<int>(transformComponent.translation.x),
+            static_cast<int>(transformComponent.translation.y),
             static_cast<int>(spriteComponent.width * transformComponent.scale.x),
             static_cast<int>(spriteComponent.height * transformComponent.scale.y)
         };

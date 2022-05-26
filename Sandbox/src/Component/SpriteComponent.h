@@ -6,6 +6,8 @@
 namespace Prune 
 {
     /**
+     * Add a sprite to the entity
+     * 
      * @param spriteId The sprite id to load from the sprite library
      * @param width An int setting the width of the sprite
      * @param width An int setting the height of the sprite

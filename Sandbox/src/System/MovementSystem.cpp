@@ -11,7 +11,7 @@ void Prune::MovementSystem::Update(entt::registry& registry, double delta)
         TransformComponent& transformComponent = view.get<TransformComponent>(entity);
         VelocityComponent& velocityComponent = view.get<VelocityComponent>(entity);
 
-        transformComponent.position.x += static_cast<int>(velocityComponent.velocity.x * delta);
-        transformComponent.position.y += static_cast<int>(velocityComponent.velocity.y * delta);
+        transformComponent.translation.x += static_cast<int>(velocityComponent.velocity.x * delta);
+        transformComponent.translation.y += static_cast<int>(velocityComponent.velocity.y * delta);
     }
 };
