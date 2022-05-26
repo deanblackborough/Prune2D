@@ -15,7 +15,6 @@ namespace Prune
         void InitECS();
         void SetRenderer(SDL_Renderer* renderer);
 
-        void CaptureEvents();
         void CreateEntities();
         void AddSpritesToLibrary();
         void RunSystems(double deltaTime);

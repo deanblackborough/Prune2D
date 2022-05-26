@@ -33,18 +33,11 @@ void Prune::SpriteLibrary::AddSprite(
     SDL_FreeSurface(surface);
 
     m_SpriteTextures.emplace(spriteId, texture);
-
-    PRUNE_LOG_INFO(
-        "Added sprite {0} to SpriteLibrary with key {1}",
-        spriteFilePath.c_str(),
-        spriteId
-    );
 }
 
 SDL_Texture* Prune::SpriteLibrary::GetSpriteTexture(const std::string& spriteId)
 {
     if (m_SpriteTextures.contains(spriteId)) {
-        PRUNE_LOG_INFO("Found texture for key '{0}'", spriteId);
         return m_SpriteTextures[spriteId];
     }
 

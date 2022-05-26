@@ -25,7 +25,6 @@ void Prune::SpriteRenderSystem::Update(
         SDL_Texture* texture = spriteLibrary.GetSpriteTexture(spriteComponent.spriteId);
         if (texture != nullptr)
         {
-
             SDL_RenderCopyEx(
                 renderer,
                 texture,

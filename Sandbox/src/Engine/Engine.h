@@ -10,17 +10,17 @@ namespace Prune {
     {
     public:
         Engine();
-        ~Engine();
+        ~Engine() = default;
 
-        void Down();
-        void Run();
         void Up();
+        void Run();
+        void Down();
 
     private:
 
         bool m_EngineRunning;
-        bool m_Borderless;
-        bool m_Fullscreen;
+        bool m_BorderlessWindow;
+        bool m_FullscreenWindow;
         bool m_VSync;
 
         const char* m_EngineName;
@@ -36,7 +36,7 @@ namespace Prune {
 
         entt::registry m_Registry;
 
-        void CaptureEvents();
+        void CaptureInputEvents();
         void Render(Game& game);
         
         void SDLCreateRenderer();

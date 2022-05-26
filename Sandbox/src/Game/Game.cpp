@@ -22,17 +22,6 @@ void Prune::Game::SetRenderer(SDL_Renderer* renderer)
     m_Renderer = renderer;
 }
 
-void Prune::Game::CaptureEvents()
-{
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
-    {
-        /*switch (event.type)
-        {
-        }*/
-    }
-}
-
 void Prune::Game::CreateEntities()
 {
     // Default

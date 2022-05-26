@@ -11,10 +11,10 @@ namespace Prune
     public:
         static void Init();
 
-        inline static std::shared_ptr<spdlog::logger>& GetLogger() { return s_EngineLogger; }
+        inline static std::shared_ptr<spdlog::logger>& GetLogger() { return s_Prune2DLogger; }
 
     private:
-        static std::shared_ptr<spdlog::logger> s_EngineLogger;
+        static std::shared_ptr<spdlog::logger> s_Prune2DLogger;
     };
 
     // Macros

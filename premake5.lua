@@ -11,8 +11,8 @@ workspace "Prune2D"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "Game"
-    location "Game"
+project "Sandbox"
+    location "Sandbox"
     kind "ConsoleApp"
     language "C++"
 

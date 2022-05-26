@@ -6,53 +6,14 @@ Prune::Engine::Engine()
 {
     m_EngineName = "Prune2D";
     m_EngineRunning = false;
-    m_Borderless = false;
-    m_Fullscreen = false;
+    m_BorderlessWindow = false;
+    m_FullscreenWindow = false;
     m_VSync = true;
 
-    PRUNE_LOG_INFO("EngineRunning set to {0}", m_EngineRunning);
-    PRUNE_LOG_INFO("Borderless set to {0}", m_Borderless);
-    PRUNE_LOG_INFO("Fullscreen set to {0}", m_Fullscreen);
-    PRUNE_LOG_INFO("VSync set to {0}", m_VSync);
-}
-
-Prune::Engine::~Engine()
-{
-}
-
-void Prune::Engine::Down()
-{
-    SDL_DestroyRenderer(m_Renderer);
-    SDL_DestroyWindow(m_Window);
-    SDL_Quit();
-}
-
-void Prune::Engine::Run()
-{
-    Game game;
-    
-    game.InitECS();
-    game.SetRenderer(m_Renderer);
-    game.AddSpritesToLibrary();
-    game.CreateEntities();
-    
-    Uint32 frameEndTime = 0;
-
-    while (m_EngineRunning)
-    {
-        Uint32 frameStartTime = SDL_GetTicks();
-        
-        CaptureEvents();
-        game.CaptureEvents();
-        
-        double deltaTime = (frameStartTime - frameEndTime) / 1000.f;
-        PRUNE_LOG_INFO("DeltaTime: {0}", deltaTime);
-
-        game.RunSystems(deltaTime);
-        Render(game);
-
-        frameEndTime = frameStartTime;
-    }
+    PRUNE_LOG_INFO("Setup: EngineRunning set to {0}", m_EngineRunning);
+    PRUNE_LOG_INFO("Setup: Borderless set to {0}", m_BorderlessWindow);
+    PRUNE_LOG_INFO("Setup: Fullscreen set to {0}", m_FullscreenWindow);
+    PRUNE_LOG_INFO("Setup: VSync set to {0}", m_VSync);
 }
 
 void Prune::Engine::Up()
@@ -66,7 +27,41 @@ void Prune::Engine::Up()
     m_EngineRunning = true;
 }
 
-void Prune::Engine::CaptureEvents()
+void Prune::Engine::Run()
+{
+    Game game;
+
+    game.InitECS();
+    game.SetRenderer(m_Renderer);
+    game.AddSpritesToLibrary();
+    game.CreateEntities();
+
+    Uint32 frameEndTime = 0;
+
+    while (m_EngineRunning)
+    {
+        Uint32 frameStartTime = SDL_GetTicks();
+
+        CaptureInputEvents();
+        game.CaptureInputEvents();
+
+        double deltaTime = (frameStartTime - frameEndTime) / 1000.f;
+
+        game.RunSystems(deltaTime);
+        Render(game);
+
+        frameEndTime = frameStartTime;
+    }
+}
+
+void Prune::Engine::Down()
+{
+    SDL_DestroyRenderer(m_Renderer);
+    SDL_DestroyWindow(m_Window);
+    SDL_Quit();
+}
+
+void Prune::Engine::CaptureInputEvents()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) 
@@ -119,21 +114,15 @@ void Prune::Engine::SDLCreateRenderer()
     }
 
     SDL_RenderSetLogicalSize(m_Renderer, m_LogicalWindowWidth, m_LogicalWindowHeight);
-    if (m_Fullscreen == true)
+    if (m_FullscreenWindow == true)
     {
         SDL_SetWindowFullscreen(m_Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
     }
-
-    PRUNE_LOG_INFO(
-        "Created the SDL renderer, logical size set to width: {0}, height: {1}", 
-        m_LogicalWindowWidth,
-        m_LogicalWindowHeight
-    );
 }
 
 void Prune::Engine::SDLCreateWindow()
 {
-    if (m_Fullscreen == true)
+    if (m_FullscreenWindow == true)
     {
         SDL_DisplayMode display_mode;
 
@@ -149,7 +138,7 @@ void Prune::Engine::SDLCreateWindow()
 
     Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI;
 
-    if (m_Borderless == true) 
+    if (m_BorderlessWindow == true) 
     {
         flags |= SDL_WINDOW_BORDERLESS;
     }
@@ -168,8 +157,6 @@ void Prune::Engine::SDLCreateWindow()
         PRUNE_LOG_CRITICAL("Failed to create the SDL window, unknown error //TODO get error");
         return;
     }
-
-    PRUNE_LOG_INFO("Create the SDL window, width: {0} and height: {1}", m_WindowWidth, m_WindowHeight);
 }
 
 void Prune::Engine::SDLInit()
@@ -179,6 +166,4 @@ void Prune::Engine::SDLInit()
         PRUNE_LOG_CRITICAL("Failed to initialise SDL //TODO Show error");
         return;
     }
-
-    PRUNE_LOG_INFO("Successfully initialised SDL");
 }
