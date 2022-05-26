@@ -43,11 +43,11 @@ void Prune::Engine::Run()
         Uint32 frameStartTime = SDL_GetTicks();
 
         CaptureInputEvents();
-        game.CaptureInputEvents();
 
         double deltaTime = (frameStartTime - frameEndTime) / 1000.f;
 
         game.RunSystems(deltaTime);
+        
         Render(game);
 
         frameEndTime = frameStartTime;

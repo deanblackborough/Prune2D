@@ -5,6 +5,15 @@
 
 namespace Prune 
 {
+    /**
+     * @param spriteId The sprite id to load from the sprite library
+     * @param width An int setting the width of the sprite
+     * @param width An int setting the height of the sprite
+     * @param sourceRectX An int setting the source rectangle x position on the sprite, defaults to 0
+     * @param sourceRectY An int setting the source rectangle Y position on the sprite, defaults to 0
+     * @param sourceRectWidth An int setting the width of the source rectangle, defaults to 64
+     * @param sourceRectHeight An int setting the height of the source rectangle, defaults to 64
+     */
     struct SpriteComponent
     {
     public:

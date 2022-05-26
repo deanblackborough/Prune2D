@@ -24,25 +24,22 @@ void Prune::Game::SetRenderer(SDL_Renderer* renderer)
 
 void Prune::Game::CreateEntities()
 {
-    // Default
-    entt::entity entity1 = m_Registry.create();
-    m_Registry.emplace<TransformComponent>(entity1, glm::vec2(10, 10), glm::vec2(1, 1));
-    m_Registry.emplace<VelocityComponent>(entity1, glm::vec2(0, 0));
-    m_Registry.emplace<SpriteComponent>(entity1, "character-idle", 64, 64);
-    m_Registry.emplace<AnimatedSpriteComponent>(entity1, 1, 4, 6);
+    entt::entity plane_grey = m_Registry.create();
+    m_Registry.emplace<TransformComponent>(plane_grey, glm::vec2(10, 10), glm::vec2(1, 1));
+    m_Registry.emplace<VelocityComponent>(plane_grey, glm::vec2(100, 0));
+    m_Registry.emplace<SpriteComponent>(plane_grey, "plane-grey-right", 64, 64, 0, 0, 128, 128);
 
-    entt::entity entity2 = m_Registry.create();
-    m_Registry.emplace<TransformComponent>(entity2, glm::vec2(10, 100), glm::vec2(1, 1));
-    m_Registry.emplace<VelocityComponent>(entity2, glm::vec2(0, 0));
-    m_Registry.emplace<SpriteComponent>(entity2, "character-attack", 128, 64, 0, 0, 128, 64);
-    m_Registry.emplace<AnimatedSpriteComponent>(entity2, 1, 4, 6);
+    entt::entity plane_green = m_Registry.create();
+    m_Registry.emplace<TransformComponent>(plane_green, glm::vec2((800-10-64), 10), glm::vec2(1, 1));
+    m_Registry.emplace<VelocityComponent>(plane_green, glm::vec2(-100, 0));
+    m_Registry.emplace<SpriteComponent>(plane_green, "plane-green-left", 64, 64, 0, 0, 128, 128);
 }
 
 void Prune::Game::AddSpritesToLibrary()
 {
     m_SpriteLibrary.SetRenderer(m_Renderer);
-    m_SpriteLibrary.AddSprite("character-idle", "assets\\sprites\\character-idle.png");
-    m_SpriteLibrary.AddSprite("character-attack", "assets\\sprites\\character-attack.png");
+    m_SpriteLibrary.AddSprite("plane-grey-right", "assets\\sprites\\plane-grey-right.png");
+    m_SpriteLibrary.AddSprite("plane-green-left", "assets\\sprites\\plane-green-left.png");
 }
 
 void Prune::Game::RunSystems(double delta)
