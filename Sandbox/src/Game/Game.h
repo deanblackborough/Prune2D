@@ -20,10 +20,13 @@ namespace Prune
         void RunSystems(double deltaTime);
         void RenderEntities();
         void RenderBackground();
+        void SetShowBoxColliders2D(bool showBoxColliders2D);
 
     private:
         SDL_Renderer* m_Renderer = nullptr;
         entt::registry m_Registry;
         SpriteLibrary m_SpriteLibrary;
+
+        bool m_ShowBoxColliders2D;
     };
 }

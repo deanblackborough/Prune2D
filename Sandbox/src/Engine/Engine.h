@@ -23,6 +23,8 @@ namespace Prune {
         bool m_FullscreenWindow;
         bool m_VSync;
 
+        bool m_ShowBoxColliders2D;
+
         const char* m_EngineName;
 
         int m_WindowWidth = 800;

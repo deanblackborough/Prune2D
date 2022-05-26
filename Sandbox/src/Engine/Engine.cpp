@@ -10,10 +10,13 @@ Prune::Engine::Engine()
     m_FullscreenWindow = false;
     m_VSync = true;
 
+    m_ShowBoxColliders2D = false;
+
     PRUNE_LOG_INFO("Setup: EngineRunning set to {0}", m_EngineRunning);
     PRUNE_LOG_INFO("Setup: Borderless set to {0}", m_BorderlessWindow);
     PRUNE_LOG_INFO("Setup: Fullscreen set to {0}", m_FullscreenWindow);
     PRUNE_LOG_INFO("Setup: VSync set to {0}", m_VSync);
+    PRUNE_LOG_INFO("Debug: Show BoxColliders2D to {0}", m_ShowBoxColliders2D);
 }
 
 void Prune::Engine::Up()
@@ -64,7 +67,7 @@ void Prune::Engine::Down()
 void Prune::Engine::CaptureInputEvents()
 {
     SDL_Event event;
-    while (SDL_PollEvent(&event)) 
+    while (SDL_PollEvent(&event))
     {
         switch (event.type)
         {
@@ -80,6 +83,10 @@ void Prune::Engine::CaptureInputEvents()
                 PRUNE_LOG_INFO("SDLK_ESCAPE event captured - exiting");
                 m_EngineRunning = false;
                 break;
+            case SDLK_d:
+                m_ShowBoxColliders2D = !m_ShowBoxColliders2D;
+                PRUNE_LOG_INFO("Debug: Show box colliders 2d toggled, setting set to {0}", m_ShowBoxColliders2D);
+                break;
             }
 
             break;
@@ -89,6 +96,9 @@ void Prune::Engine::CaptureInputEvents()
 
 void Prune::Engine::Render(Game& game)
 {
+    // Set any debug settings
+    game.SetShowBoxColliders2D(m_ShowBoxColliders2D);
+
     game.RenderBackground();
     game.RenderEntities();
 
