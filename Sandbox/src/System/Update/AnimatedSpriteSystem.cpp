@@ -1,6 +1,6 @@
 #include "AnimatedSpriteSystem.h"
-#include "../Component/SpriteComponent.h"
-#include "../Component/AnimatedSpriteComponent.h"
+#include "../../Component/SpriteComponent.h"
+#include "../../Component/AnimatedSpriteComponent.h"
 
 void Prune::AnimatedSpriteSystem::Update(entt::registry& registry)
 {

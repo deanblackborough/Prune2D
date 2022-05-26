@@ -1,9 +1,9 @@
 #include "SpriteRenderSystem.h"
-#include "../Component/TransformComponent.h"
-#include "../Component/SpriteComponent.h"
-#include "../Log/Log.h"
+#include "../../Component/TransformComponent.h"
+#include "../../Component/SpriteComponent.h"
+#include "../../Log/Log.h"
 
-void Prune::SpriteRenderSystem::Update(
+void Prune::SpriteRenderSystem::Render(
     entt::registry& registry, 
     SDL_Renderer* renderer,
     SpriteLibrary& spriteLibrary
