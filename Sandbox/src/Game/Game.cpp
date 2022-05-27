@@ -5,6 +5,7 @@
 #include "../Component/TransformComponent.h"
 #include "../Component/VelocityComponent.h"
 #include "../System/Update/AnimatedSpriteSystem.h"
+#include "../System/Update/BoxCollider2DCollisionSystem.h"
 #include "../System/Update/MovementSystem.h"
 #include "../System/Render/BoxCollider2DRenderSystem.h"
 #include "../System/Render/SpriteRenderSystem.h"
@@ -27,7 +28,7 @@ void Prune::Game::SetRenderer(SDL_Renderer* renderer)
 void Prune::Game::CreateEntities()
 {
     entt::entity plane_grey = m_Registry.create();
-    m_Registry.emplace<TransformComponent>(plane_grey, glm::vec2(10, (300-16)), glm::vec2(2, 2));
+    m_Registry.emplace<TransformComponent>(plane_grey, glm::vec2(10, (300-16)), glm::vec2(1, 1));
     m_Registry.emplace<VelocityComponent>(plane_grey, glm::vec2(100, 0));
     m_Registry.emplace<SpriteComponent>(plane_grey, "plane-grey-right", 32, 32, 0, 0, 128, 128);
     m_Registry.emplace<BoxCollider2DComponent>(plane_grey, glm::vec2(32, 32));
@@ -53,6 +54,9 @@ void Prune::Game::RunSystems(double delta)
 
     AnimatedSpriteSystem animatedSpriteSystem = AnimatedSpriteSystem();
     animatedSpriteSystem.Update(m_Registry);
+
+    BoxCollider2DCollisionSystem boxCollider2DCollisionSystem = BoxCollider2DCollisionSystem();
+    boxCollider2DCollisionSystem.Update(m_Registry);
 }
 
 void Prune::Game::RenderEntities()
