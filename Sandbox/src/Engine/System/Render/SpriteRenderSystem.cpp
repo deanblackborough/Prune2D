@@ -1,7 +1,7 @@
 #include "SpriteRenderSystem.h"
 #include "../../Component/TransformComponent.h"
 #include "../../Component/SpriteComponent.h"
-#include "../../Log/Log.h"
+#include "../../../Log/Log.h"
 
 void Prune::SpriteRenderSystem::Render(
     entt::registry& registry, 

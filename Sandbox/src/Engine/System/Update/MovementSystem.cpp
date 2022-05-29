@@ -1,7 +1,7 @@
 #include "MovementSystem.h"
 #include "../../Component/TransformComponent.h"
 #include "../../Component/VelocityComponent.h"
-#include "../../Log/Log.h"
+#include "../../../Log/Log.h"
 
 void Prune::MovementSystem::Update(entt::registry& registry, double delta)
 {

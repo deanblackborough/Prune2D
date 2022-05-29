@@ -1,7 +1,7 @@
 #include <entt.hpp>
 #include <SDL.h>
 #include <SDL_image.h>
-#include "../../Library/SpriteLibrary.h"
+#include "../../../Library/SpriteLibrary.h"
 
 namespace Prune 
 {

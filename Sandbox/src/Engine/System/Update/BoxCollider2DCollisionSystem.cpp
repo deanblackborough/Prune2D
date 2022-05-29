@@ -1,7 +1,7 @@
 #include "BoxCollider2DCollisionSystem.h"
 #include "../../Component/TransformComponent.h"
 #include "../../Component/BoxCollider2DComponent.h"
-#include "../../Log/Log.h"
+#include "../../../Log/Log.h"
 
 void Prune::BoxCollider2DCollisionSystem::Update(entt::registry& registry)
 {
