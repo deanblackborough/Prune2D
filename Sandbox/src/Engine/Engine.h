@@ -13,17 +13,15 @@ namespace Prune {
         ~Engine() = default;
 
         void Up();
-        void Run();
         void Down();
+
+        SDL_Renderer* GetRenderer();
 
     private:
 
-        bool m_EngineRunning;
         bool m_BorderlessWindow;
         bool m_FullscreenWindow;
         bool m_VSync;
-
-        bool m_ShowBoxColliders2D;
 
         const char* m_EngineName;
 
@@ -37,9 +35,6 @@ namespace Prune {
         SDL_Renderer* m_Renderer = nullptr;
 
         entt::registry m_Registry;
-
-        void CaptureInputEvents();
-        void Render(Game& game);
         
         void SDLCreateRenderer();
         void SDLCreateWindow();

@@ -5,12 +5,15 @@
 int main(int argc, char* argv[])
 {
     Prune::Log::Init();
-    PRUNE_LOG_INFO("Logger started");
 
     Prune::Engine engine;
+    Prune::Game game;
 
     engine.Up();
-    engine.Run();
+
+    game.SetRenderer(engine.GetRenderer());
+    game.Run();
+
     engine.Down();
 
     return 0;

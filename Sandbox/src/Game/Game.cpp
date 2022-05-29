@@ -12,7 +12,73 @@
 
 Prune::Game::Game()
 {
+    InitECS();
+
     m_SpriteLibrary = SpriteLibrary();
+    m_IsRunning = true;
+}
+
+void Prune::Game::Run()
+{
+    // This is effectively the level/menu being loaded, later
+    // on, work out how we have going to handle that, for now, 
+    // OK to go straight to the game as that is all we have
+    {
+        AddSpritesToLibrary();
+        CreateEntities();
+    }
+
+    Uint32 frameEndTime = 0;
+
+    while (m_IsRunning)
+    {
+        Uint32 frameStartTime = SDL_GetTicks();
+
+        CaptureInputEvents();
+
+        double deltaTime = (frameStartTime - frameEndTime) / 1000.f;
+
+        RunSystems(deltaTime);
+
+        Render();
+
+        frameEndTime = frameStartTime;
+    }
+}
+
+void Prune::Game::Render()
+{
+    RenderBackground();
+    RenderEntities();
+
+    SDL_RenderPresent(m_Renderer);
+}
+
+void Prune::Game::CaptureInputEvents()
+{
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            m_IsRunning = false;
+            break;
+
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_ESCAPE:
+                m_IsRunning = false;
+                break;
+            case SDLK_d:
+                m_ShowBoxColliders2D = !m_ShowBoxColliders2D;
+                break;
+            }
+
+            break;
+        }
+    }
 }
 
 void Prune::Game::InitECS()
@@ -72,9 +138,4 @@ void Prune::Game::RenderBackground()
 {
     SDL_SetRenderDrawColor(m_Renderer, 80, 50, 185, 255);
     SDL_RenderClear(m_Renderer);
-}
-
-void Prune::Game::SetShowBoxColliders2D(bool showBoxColliders2D)
-{
-    m_ShowBoxColliders2D = showBoxColliders2D;
 }

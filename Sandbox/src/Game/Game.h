@@ -12,21 +12,25 @@ namespace Prune
         Game();
         ~Game() = default;
 
-        void InitECS();
+        void Render();
+        void Run();
         void SetRenderer(SDL_Renderer* renderer);
-
-        void CreateEntities();
-        void AddSpritesToLibrary();
-        void RunSystems(double deltaTime);
-        void RenderEntities();
-        void RenderBackground();
-        void SetShowBoxColliders2D(bool showBoxColliders2D);
 
     private:
         SDL_Renderer* m_Renderer = nullptr;
         entt::registry m_Registry;
         SpriteLibrary m_SpriteLibrary;
 
-        bool m_ShowBoxColliders2D;
+        bool m_ShowBoxColliders2D = false;
+        bool m_IsRunning = false;
+        
+        void InitECS();
+        void RenderEntities();
+        void RenderBackground();
+        
+        void CreateEntities();
+        void AddSpritesToLibrary();
+        void RunSystems(double deltaTime);
+        void CaptureInputEvents();
     };
 }
