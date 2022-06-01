@@ -1,22 +1,22 @@
-#include "BoxCollider2DCollisionSystem.h"
+#include "CollisionSystem.h"
 #include "../../Component/TransformComponent.h"
-#include "../../Component/BoxCollider2DComponent.h"
+#include "../../Component/BoxColliderComponent.h"
 #include "../../Event/CollisionEvent.h"
 #include "../../../Log/Log.h"
 
-void Prune::BoxCollider2DCollisionSystem::Update(entt::registry& registry, std::unique_ptr<EventBus>& eventBus)
+void Prune::CollisionSystem::Update(entt::registry& registry, std::unique_ptr<EventBus>& eventBus)
 {
-    auto outer_view = registry.view<TransformComponent, BoxCollider2DComponent>();
+    auto outer_view = registry.view<TransformComponent, BoxColliderComponent>();
 
     for (auto outer_entity : outer_view) {
         TransformComponent& transformComponentOuter = outer_view.get<TransformComponent>(outer_entity);
-        BoxCollider2DComponent& boxCollider2DComponentOuter = outer_view.get<BoxCollider2DComponent>(outer_entity);
+        BoxColliderComponent& boxCollider2DComponentOuter = outer_view.get<BoxColliderComponent>(outer_entity);
 
-        auto inner_view = registry.view<TransformComponent, BoxCollider2DComponent>();
+        auto inner_view = registry.view<TransformComponent, BoxColliderComponent>();
 
         for (auto inner_entity : inner_view) {
             TransformComponent& transformComponentInner = inner_view.get<TransformComponent>(inner_entity);
-            BoxCollider2DComponent& boxCollider2DComponentInner = inner_view.get<BoxCollider2DComponent>(inner_entity);
+            BoxColliderComponent& boxCollider2DComponentInner = inner_view.get<BoxColliderComponent>(inner_entity);
 
             if (inner_entity == outer_entity)
             {
@@ -45,7 +45,7 @@ void Prune::BoxCollider2DCollisionSystem::Update(entt::registry& registry, std::
     }
 };
 
-bool Prune::BoxCollider2DCollisionSystem::checkForCollision(
+bool Prune::CollisionSystem::checkForCollision(
     int outerPositionX,
     int outerPositionY,
     int outerWidth,

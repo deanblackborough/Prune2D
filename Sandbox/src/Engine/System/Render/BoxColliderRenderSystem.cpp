@@ -1,9 +1,9 @@
-#include "BoxCollider2DRenderSystem.h"
+#include "BoxColliderRenderSystem.h"
 #include "../../Component/TransformComponent.h"
-#include "../../Component/BoxCollider2DComponent.h"
+#include "../../Component/BoxColliderComponent.h"
 #include "../../../Log/Log.h"
 
-void Prune::BoxCollider2DRenderSystem::Render(
+void Prune::BoxColliderRenderSystem::Render(
     entt::registry& registry, 
     SDL_Renderer* renderer,
     bool showBoxColliders2D
@@ -11,11 +11,11 @@ void Prune::BoxCollider2DRenderSystem::Render(
 {
     if (showBoxColliders2D)
     {
-        auto view = registry.view<TransformComponent, BoxCollider2DComponent>();
+        auto view = registry.view<TransformComponent, BoxColliderComponent>();
 
         for (auto entity : view) {
             TransformComponent& transformComponent = view.get<TransformComponent>(entity);
-            BoxCollider2DComponent& boxCollider2DComponent = view.get<BoxCollider2DComponent>(entity);
+            BoxColliderComponent& boxCollider2DComponent = view.get<BoxColliderComponent>(entity);
 
             SDL_Rect boxCollider2DRect = {
                 static_cast<int>(transformComponent.translation.x + boxCollider2DComponent.offset.x),

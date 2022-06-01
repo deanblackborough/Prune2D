@@ -7,11 +7,11 @@ namespace Prune
      * Iterate all the entities entities with transform and boxcollider2d components and render the 
      * box collider
      */
-    class BoxCollider2DRenderSystem
+    class BoxColliderRenderSystem
     {
     public:
-        BoxCollider2DRenderSystem() = default;
-        ~BoxCollider2DRenderSystem() = default;
+        BoxColliderRenderSystem() = default;
+        ~BoxColliderRenderSystem() = default;
 
         void Render(
             entt::registry& registry, 

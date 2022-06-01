@@ -32,8 +32,23 @@ To date, the features are limited, I'll try to keep this list updated, excuse th
 
 - Create a Window via SDL
 - Enitity component system via entt
-- Display sprites and animated sprites
+- Display sprites and optionally animate them with sprite sheets
 - Movement, well, a velocity component and movement system
-- AABB collision system.
+- AABB collision system via BoxColliderComponent and CollisionSystem
+- Events, currently used by the CollisionSystem and HealthSystem, CollisionSystem emits a CollisionEvent picked up by the HealthSystem
+- Debug toggle to display box colliders
 - Logging via spdlog
 - Sprite library
+- Clear project structure, engine code in src/Engine, base code in src/, game code should reside in src/Game
+
+## Missing features
+
+The ability to create a game, including but not limited to....
+
+- An example game
+- Render backgrounds
+- Render UI
+- Music and Sound effects
+- Game settings
+- Game editor
+- Do anything with user input other than exit
