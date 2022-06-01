@@ -1,9 +1,10 @@
 #include "BoxCollider2DCollisionSystem.h"
 #include "../../Component/TransformComponent.h"
 #include "../../Component/BoxCollider2DComponent.h"
+#include "../../Event/CollisionEvent.h"
 #include "../../../Log/Log.h"
 
-void Prune::BoxCollider2DCollisionSystem::Update(entt::registry& registry)
+void Prune::BoxCollider2DCollisionSystem::Update(entt::registry& registry, std::unique_ptr<EventBus>& eventBus)
 {
     auto outer_view = registry.view<TransformComponent, BoxCollider2DComponent>();
 
@@ -36,6 +37,7 @@ void Prune::BoxCollider2DCollisionSystem::Update(entt::registry& registry)
 
                 if (collision)
                 {
+                    eventBus->EmitEvent<CollisionEvent>(registry, inner_entity, outer_entity);
                     PRUNE_LOG_INFO("There has been a collision!!!");
                 }
             }

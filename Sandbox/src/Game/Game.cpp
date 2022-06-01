@@ -6,6 +6,7 @@
 #include "../Engine/Component/VelocityComponent.h"
 #include "../Engine/System/Update/AnimatedSpriteSystem.h"
 #include "../Engine/System/Update/BoxCollider2DCollisionSystem.h"
+#include "../Engine/System/Update/DamageSystem.h"
 #include "../Engine/System/Update/MovementSystem.h"
 #include "../Engine/System/Render/BoxCollider2DRenderSystem.h"
 #include "../Engine/System/Render/SpriteRenderSystem.h"
@@ -15,6 +16,7 @@ Prune::Game::Game()
     InitECS();
 
     m_SpriteLibrary = SpriteLibrary();
+    m_EventBus = std::make_unique<EventBus>();
     m_IsRunning = true;
 }
 
@@ -37,6 +39,8 @@ void Prune::Game::Run()
         CaptureInputEvents();
 
         double deltaTime = (frameStartTime - frameEndTime) / 1000.f;
+
+        m_EventBus->Reset();
 
         RunSystems(deltaTime);
 
@@ -115,6 +119,9 @@ void Prune::Game::AddSpritesToLibrary()
 
 void Prune::Game::RunSystems(double delta)
 {
+    DamageSystem damageSystem = DamageSystem();
+    damageSystem.SubscribeToEvents(m_EventBus);
+
     MovementSystem movementSystem = MovementSystem();
     movementSystem.Update(m_Registry, delta);
 
@@ -122,7 +129,7 @@ void Prune::Game::RunSystems(double delta)
     animatedSpriteSystem.Update(m_Registry);
 
     BoxCollider2DCollisionSystem boxCollider2DCollisionSystem = BoxCollider2DCollisionSystem();
-    boxCollider2DCollisionSystem.Update(m_Registry);
+    boxCollider2DCollisionSystem.Update(m_Registry, m_EventBus);
 }
 
 void Prune::Game::RenderEntities()

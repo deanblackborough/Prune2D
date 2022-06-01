@@ -1,5 +1,6 @@
 #include <entt.hpp>
 #include <glm.hpp>
+#include "../../../Event/EventBus.h"
 
 namespace Prune 
 {
@@ -13,7 +14,7 @@ namespace Prune
         BoxCollider2DCollisionSystem() = default;
         ~BoxCollider2DCollisionSystem() = default;
 
-        void Update(entt::registry& registry);
+        void Update(entt::registry& registry, std::unique_ptr<EventBus>& eventBus);
 
     private:
         bool checkForCollision(

@@ -19,8 +19,6 @@ void Prune::Engine::Up()
     Engine::SDLInit();
     Engine::SDLCreateWindow();
     Engine::SDLCreateRenderer();
-
-    entt::registry m_Registry;
 }
 
 void Prune::Engine::Down()

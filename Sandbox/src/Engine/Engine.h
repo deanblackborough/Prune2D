@@ -33,9 +33,7 @@ namespace Prune {
 
         SDL_Window* m_Window = nullptr;
         SDL_Renderer* m_Renderer = nullptr;
-
-        entt::registry m_Registry;
-        
+                
         void SDLCreateRenderer();
         void SDLCreateWindow();
         void SDLInit();

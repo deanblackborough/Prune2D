@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <entt.hpp>
+#include "../Event/EventBus.h"
 #include "../Library/SpriteLibrary.h"
 
 namespace Prune
@@ -19,6 +20,7 @@ namespace Prune
     private:
         SDL_Renderer* m_Renderer = nullptr;
         entt::registry m_Registry;
+        std::unique_ptr<EventBus> m_EventBus;
         SpriteLibrary m_SpriteLibrary;
 
         bool m_ShowBoxColliders2D = false;
